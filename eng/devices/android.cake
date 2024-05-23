@@ -18,9 +18,6 @@ var testAppInstrumentation = Argument("instrumentation", EnvironmentVariable("AN
 var testResultsPath = Argument("results", EnvironmentVariable("ANDROID_TEST_RESULTS") ?? GetTestResultsDirectory()?.FullPath);
 var deviceCleanupEnabled = Argument("cleanup", true);
 
-// Test where clause
-string testWhere = Argument("where", EnvironmentVariable("NUNIT_TEST_WHERE") ?? "");
-
 // Device details
 var deviceSkin = Argument("skin", EnvironmentVariable("ANDROID_TEST_SKIN") ?? "Nexus 5X");
 var androidAvd = "DEVICE_TESTS_EMULATOR";
@@ -96,7 +93,6 @@ Task("uitest-build")
 
 	});
 Task("uitest")
-	.IsDependentOn("uitest-build")
 	.Does(() =>
 	{
 		ExecuteUITests(projectPath, testAppProjectPath, testAppPackageName, testDevice, testResultsPath, binlogDirectory, configuration, targetFramework, "", androidVersion, dotnetToolPath, testAppInstrumentation);
