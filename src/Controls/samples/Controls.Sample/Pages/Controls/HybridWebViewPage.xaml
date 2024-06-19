@@ -8,7 +8,7 @@
     <ScrollView>
       <VerticalStackLayout Padding="12">
         <Label Text="HybridWebView here" x:Name="statusLabel" />
-        <Button Text="Send message to JS" Pressed="SendMessageButton_Pressed" />
+        <Button Text="Send message to JS" Clicked="SendMessageButton_Clicked" />
         <HybridWebView
             x:Name="hwv"
             HeightRequest="150"

@@ -10,7 +10,7 @@ namespace Maui.Controls.Sample.Pages
 			InitializeComponent();
 		}
 
-		private void SendMessageButton_Pressed(object sender, EventArgs e)
+		private void SendMessageButton_Clicked(object sender, EventArgs e)
 		{
 			hwv.SendRawMessage("Hello from C#!");
 		}
