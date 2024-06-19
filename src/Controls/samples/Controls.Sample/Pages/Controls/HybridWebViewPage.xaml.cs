@@ -15,7 +15,7 @@ namespace Maui.Controls.Sample.Pages
 			hwv.SendRawMessage("Hello from C#!");
 		}
 
-		private void hwv_RawMessageReceived(object sender, HybridWebView.HybridWebViewRawMessageReceivedEventArgs e)
+		private void hwv_RawMessageReceived(object sender, HybridWebViewRawMessageReceivedEventArgs e)
 		{
 			Dispatcher.Dispatch(() => statusLabel.Text += e.Message);
 		}

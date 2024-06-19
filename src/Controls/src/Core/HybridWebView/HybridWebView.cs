@@ -57,15 +57,6 @@ namespace Microsoft.Maui.Controls
 		/// </summary>
 		public event EventHandler<HybridWebViewRawMessageReceivedEventArgs>? RawMessageReceived;
 
-		public class HybridWebViewRawMessageReceivedEventArgs : EventArgs
-		{
-			public HybridWebViewRawMessageReceivedEventArgs(string? message)
-			{
-				Message = message;
-			}
-
-			public string? Message { get; }
-		}
 		//public void Navigate(string url)
 		//{
 		//	NavigateCore(url);
