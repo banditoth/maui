@@ -419,7 +419,13 @@ Microsoft.Maui.Handlers.GraphicsViewHandler
 Microsoft.Maui.Handlers.GraphicsViewHandler.GraphicsViewHandler() -> void
 Microsoft.Maui.Handlers.GraphicsViewHandler.GraphicsViewHandler(Microsoft.Maui.IPropertyMapper? mapper, Microsoft.Maui.CommandMapper? commandMapper) -> void
 Microsoft.Maui.Handlers.GraphicsViewHandler.GraphicsViewHandler(Microsoft.Maui.IPropertyMapper? mapper) -> void
-Microsoft.Maui.Handlers.IActivityIndicatorHandler
+Microsoft.Maui.Handlers.HybridWebViewHandler
+Microsoft.Maui.Handlers.HybridWebViewHandler.DefaultFile.get -> string?
+Microsoft.Maui.Handlers.HybridWebViewHandler.DefaultFile.set -> void
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridRoot.get -> string?
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridRoot.set -> void
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridWebViewHandler() -> void
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridWebViewHandler(Microsoft.Maui.IPropertyMapper? mapper = null, Microsoft.Maui.CommandMapper? commandMapper = null) -> void
 Microsoft.Maui.Handlers.IActivityIndicatorHandler.PlatformView.get -> Tizen.UIExtensions.NUI.GraphicsView.ActivityIndicator!
 Microsoft.Maui.Handlers.IActivityIndicatorHandler.VirtualView.get -> Microsoft.Maui.IActivityIndicator!
 Microsoft.Maui.Handlers.IBorderHandler
@@ -450,6 +456,15 @@ Microsoft.Maui.Handlers.IFlyoutViewHandler.VirtualView.get -> Microsoft.Maui.IFl
 Microsoft.Maui.Handlers.IGraphicsViewHandler
 Microsoft.Maui.Handlers.IGraphicsViewHandler.PlatformView.get -> Microsoft.Maui.Platform.PlatformTouchGraphicsView!
 Microsoft.Maui.Handlers.IGraphicsViewHandler.VirtualView.get -> Microsoft.Maui.IGraphicsView!
+Microsoft.Maui.Handlers.IHybridPlatformWebView
+Microsoft.Maui.Handlers.IHybridPlatformWebView.SendRawMessage(string! rawMessage) -> void
+Microsoft.Maui.Handlers.IHybridWebViewHandler
+Microsoft.Maui.Handlers.IHybridWebViewHandler.DefaultFile.get -> string?
+Microsoft.Maui.Handlers.IHybridWebViewHandler.DefaultFile.set -> void
+Microsoft.Maui.Handlers.IHybridWebViewHandler.HybridRoot.get -> string?
+Microsoft.Maui.Handlers.IHybridWebViewHandler.HybridRoot.set -> void
+Microsoft.Maui.Handlers.IHybridWebViewHandler.PlatformView.get -> object!
+Microsoft.Maui.Handlers.IHybridWebViewHandler.VirtualView.get -> Microsoft.Maui.IHybridWebView!Microsoft.Maui.Handlers.IActivityIndicatorHandler
 Microsoft.Maui.Handlers.IImageButtonHandler
 Microsoft.Maui.Handlers.IImageButtonHandler.PlatformView.get -> Microsoft.Maui.Platform.MauiImageButton!
 Microsoft.Maui.Handlers.IImageButtonHandler.VirtualView.get -> Microsoft.Maui.IImageButton!
@@ -921,6 +936,11 @@ Microsoft.Maui.IGridLayout.RowDefinitions.get -> System.Collections.Generic.IRea
 Microsoft.Maui.IGridLayout.RowSpacing.get -> double
 Microsoft.Maui.IGridRowDefinition
 Microsoft.Maui.IGridRowDefinition.Height.get -> Microsoft.Maui.GridLength
+Microsoft.Maui.IHybridWebView
+Microsoft.Maui.IHybridWebView.DefaultFile.get -> string?
+Microsoft.Maui.IHybridWebView.HybridRoot.get -> string?
+Microsoft.Maui.IHybridWebView.RawMessageReceived(string! rawMessage) -> void
+Microsoft.Maui.IHybridWebView.SendRawMessage(string! rawMessage) -> void
 Microsoft.Maui.IImage
 Microsoft.Maui.IImage.Aspect.get -> Microsoft.Maui.Aspect
 Microsoft.Maui.IImage.IsOpaque.get -> bool
@@ -2022,6 +2042,7 @@ override Microsoft.Maui.Handlers.FlyoutViewHandler.DisconnectHandler(Tizen.UIExt
 override Microsoft.Maui.Handlers.GraphicsViewHandler.ConnectHandler(Microsoft.Maui.Platform.PlatformTouchGraphicsView! platformView) -> void
 override Microsoft.Maui.Handlers.GraphicsViewHandler.CreatePlatformView() -> Microsoft.Maui.Platform.PlatformTouchGraphicsView!
 override Microsoft.Maui.Handlers.GraphicsViewHandler.DisconnectHandler(Microsoft.Maui.Platform.PlatformTouchGraphicsView! platformView) -> void
+override Microsoft.Maui.Handlers.HybridWebViewHandler.CreatePlatformView() -> object!
 override Microsoft.Maui.Handlers.ImageButtonHandler.ConnectHandler(Microsoft.Maui.Platform.MauiImageButton! platformView) -> void
 override Microsoft.Maui.Handlers.ImageButtonHandler.CreatePlatformView() -> Microsoft.Maui.Platform.MauiImageButton!
 override Microsoft.Maui.Handlers.ImageButtonHandler.DisconnectHandler(Microsoft.Maui.Platform.MauiImageButton! platformView) -> void
@@ -2294,6 +2315,11 @@ static Microsoft.Maui.Handlers.GraphicsViewHandler.MapDrawable(Microsoft.Maui.Ha
 static Microsoft.Maui.Handlers.GraphicsViewHandler.MapFlowDirection(Microsoft.Maui.Handlers.IGraphicsViewHandler! handler, Microsoft.Maui.IGraphicsView! graphicsView) -> void
 static Microsoft.Maui.Handlers.GraphicsViewHandler.MapInvalidate(Microsoft.Maui.Handlers.IGraphicsViewHandler! handler, Microsoft.Maui.IGraphicsView! graphicsView, object? arg) -> void
 static Microsoft.Maui.Handlers.GraphicsViewHandler.Mapper -> Microsoft.Maui.IPropertyMapper<Microsoft.Maui.IGraphicsView!, Microsoft.Maui.Handlers.IGraphicsViewHandler!>!
+static Microsoft.Maui.Handlers.HybridWebViewHandler.CommandMapper -> Microsoft.Maui.CommandMapper<Microsoft.Maui.IHybridWebView!, Microsoft.Maui.Handlers.IHybridWebViewHandler!>!
+static Microsoft.Maui.Handlers.HybridWebViewHandler.MapDefaultFile(Microsoft.Maui.Handlers.IHybridWebViewHandler! handler, Microsoft.Maui.IHybridWebView! hybridWebView) -> void
+static Microsoft.Maui.Handlers.HybridWebViewHandler.MapHybridRoot(Microsoft.Maui.Handlers.IHybridWebViewHandler! handler, Microsoft.Maui.IHybridWebView! hybridWebView) -> void
+static Microsoft.Maui.Handlers.HybridWebViewHandler.Mapper -> Microsoft.Maui.IPropertyMapper<Microsoft.Maui.IHybridWebView!, Microsoft.Maui.Handlers.IHybridWebViewHandler!>!
+static Microsoft.Maui.Handlers.HybridWebViewHandler.MapSendRawMessage(Microsoft.Maui.Handlers.IHybridWebViewHandler! handler, Microsoft.Maui.IHybridWebView! hybridWebView, object? arg) -> void
 static Microsoft.Maui.Handlers.ImageButtonHandler.CommandMapper -> Microsoft.Maui.CommandMapper<Microsoft.Maui.IImageButton!, Microsoft.Maui.Handlers.IImageButtonHandler!>!
 static Microsoft.Maui.Handlers.ImageButtonHandler.ImageMapper -> Microsoft.Maui.IPropertyMapper<Microsoft.Maui.IImage!, Microsoft.Maui.Handlers.IImageHandler!>!
 static Microsoft.Maui.Handlers.ImageButtonHandler.MapCornerRadius(Microsoft.Maui.Handlers.IImageButtonHandler! handler, Microsoft.Maui.IButtonStroke! buttonStroke) -> void
