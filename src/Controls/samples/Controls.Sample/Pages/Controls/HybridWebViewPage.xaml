@@ -5,17 +5,28 @@
     xmlns:views="clr-namespace:Maui.Controls.Sample.Pages.Base"
     Title="HybridWebView">
   <views:BasePage.Content>
-    <ScrollView>
-      <VerticalStackLayout Padding="12">
-        <Label Text="HybridWebView here" x:Name="statusLabel" />
-        <Button Text="Send message to JS" Clicked="SendMessageButton_Clicked" />
+
+    <Grid ColumnDefinitions="2*,1*" RowDefinitions="Auto,1*">
+
+        <Label
+          Grid.Row="0"
+          Grid.Column="0"
+          Text="HybridWebView here"
+          x:Name="statusLabel" />
+
+        <Button
+          Grid.Row="0"
+          Grid.Column="1"
+          Text="Send message to JS"
+          Clicked="SendMessageButton_Clicked" />
+
         <HybridWebView
-            x:Name="hwv"
-            HeightRequest="150"
-            HorizontalOptions="FillAndExpand"
-            HybridRoot="HybridSamplePage"
-            RawMessageReceived="hwv_RawMessageReceived"/>
-      </VerticalStackLayout>
-    </ScrollView>
+          x:Name="hwv"
+          Grid.Row="1"
+          Grid.ColumnSpan="2"
+          HybridRoot="HybridSamplePage"
+          RawMessageReceived="hwv_RawMessageReceived"/>
+
+    </Grid>
   </views:BasePage.Content>
 </views:BasePage>

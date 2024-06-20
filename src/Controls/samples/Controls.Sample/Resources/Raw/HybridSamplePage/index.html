@@ -33,26 +33,37 @@
             // Windows WebView2
             window.chrome.webview.addEventListener('message', arg => {
                 ReceiveRawMessageFromCSharp(arg.data);
+                setTimeout(() => {
+                    document.getElementById("browsertype").innerText = "WebView2";
+                }, 0);
             });
         }
-        else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.webwindowinterop) {
+        else if (window.navigator && window.navigator.product === "Gecko") {
             // iOS and MacCatalyst WKWebView
-            window.external.receiveMessage = message => {
-                ReceiveRawMessageFromCSharp(message);
+            window.external = {
+                "receiveMessage": message => {
+                    ReceiveRawMessageFromCSharp(message);
+                }
             };
+            setTimeout(() => {
+                document.getElementById("browsertype").innerText = "iOS/MacCat WKWebView";
+            }, 0);
         }
         else {
             // Android WebView
             window.addEventListener('message', arg => {
                 ReceiveRawMessageFromCSharp(arg.data);
             });
+            setTimeout(() => {
+                document.getElementById("browsertype").innerText = "Android WebView";
+            }, 0);
         }
 
     </script>
 </head>
 <body>
     <div>
-        Hybrid sample!
+        Hybrid sample! <span id="browsertype">not set</span>
     </div>
     <div>
         <button onclick="SendRawMessageToCSharp()">Send message to C#</button>

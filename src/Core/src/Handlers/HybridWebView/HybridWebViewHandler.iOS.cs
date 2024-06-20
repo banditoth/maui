@@ -18,8 +18,6 @@ namespace Microsoft.Maui.Handlers
 {
     public partial class HybridWebViewHandler : ViewHandler<IHybridWebView, WKWebView>
 	{
-		//readonly HashSet<string> _loadedCookies = new HashSet<string>();
-
 		//protected virtual float MinimumSize => 44f;
 
 		//WKUIDelegate? _delegate;
@@ -135,7 +133,12 @@ namespace Microsoft.Maui.Handlers
 
 			public void SendRawMessage(string rawMessage)
 			{
-				EvaluateJavaScript(new NSString($"window.webwindowinterop.receiveMessage({System.Text.Json.JsonSerializer.Serialize(rawMessage)})"), null);
+				EvaluateJavaScript(
+					new NSString($"window.external.receiveMessage({System.Text.Json.JsonSerializer.Serialize(rawMessage)})"),
+					(result, error) =>
+					{
+						// Handle the result or error here
+					});
 			}
 		}
 
