@@ -35,6 +35,12 @@
                 ReceiveRawMessageFromCSharp(arg.data);
             });
         }
+        else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.webwindowinterop) {
+            // iOS and MacCatalyst WKWebView
+            window.external.receiveMessage = message => {
+                ReceiveRawMessageFromCSharp(message);
+            };
+        }
         else {
             // Android WebView
             window.addEventListener('message', arg => {
