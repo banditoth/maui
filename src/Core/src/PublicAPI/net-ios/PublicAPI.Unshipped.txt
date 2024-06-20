@@ -4,6 +4,9 @@ Microsoft.Maui.FocusRequest.FocusRequest() -> void
 Microsoft.Maui.Handlers.HybridWebViewHandler
 Microsoft.Maui.Handlers.HybridWebViewHandler.DefaultFile.get -> string?
 Microsoft.Maui.Handlers.HybridWebViewHandler.DefaultFile.set -> void
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridPlatformWebView
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridPlatformWebView.HybridPlatformWebView(Microsoft.Maui.Handlers.HybridWebViewHandler! handler, CoreGraphics.CGRect frame, WebKit.WKWebViewConfiguration! configuration) -> void
+Microsoft.Maui.Handlers.HybridWebViewHandler.HybridPlatformWebView.SendRawMessage(string! rawMessage) -> void
 Microsoft.Maui.Handlers.HybridWebViewHandler.HybridRoot.get -> string?
 Microsoft.Maui.Handlers.HybridWebViewHandler.HybridRoot.set -> void
 Microsoft.Maui.Handlers.HybridWebViewHandler.HybridWebViewHandler() -> void
@@ -71,7 +74,9 @@ Microsoft.Maui.Platform.MauiScrollView.MauiScrollView() -> void
 Microsoft.Maui.SoftInputExtensions
 override Microsoft.Maui.Handlers.ButtonHandler.NeedsContainer.get -> bool
 override Microsoft.Maui.Handlers.ContentViewHandler.DisconnectHandler(Microsoft.Maui.Platform.ContentView! platformView) -> void
+override Microsoft.Maui.Handlers.HybridWebViewHandler.ConnectHandler(WebKit.WKWebView! platformView) -> void
 override Microsoft.Maui.Handlers.HybridWebViewHandler.CreatePlatformView() -> WebKit.WKWebView!
+override Microsoft.Maui.Handlers.HybridWebViewHandler.DisconnectHandler(WebKit.WKWebView! platformView) -> void
 override Microsoft.Maui.Handlers.ScrollViewHandler.NeedsContainer.get -> bool
 override Microsoft.Maui.Handlers.SwipeItemButton.Frame.get -> CoreGraphics.CGRect
 override Microsoft.Maui.Handlers.SwipeItemButton.Frame.set -> void
