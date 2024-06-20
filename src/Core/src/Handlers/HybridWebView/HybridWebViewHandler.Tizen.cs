@@ -2,7 +2,7 @@
 {
     public partial class HybridWebViewHandler : ViewHandler<IHybridWebView, MauiWebView>
 	{
-		private const double MinimumSize => 44d;
+		private const double MinimumSize = 44d;
 
 		protected override MauiWebView CreatePlatformView() => new()
 		{
