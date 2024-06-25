@@ -130,7 +130,7 @@ void ExecuteUITests(string project, string app, string device, string resultsDir
 	}
 
 	// Launch the app so it can be found by the test runner
-	StartProcess("chmod", $"+x {testApp}/Contents/MacOS/Controls.TestCases.App");
+	StartProcess("chmod", $"+x {testApp}/Contents/MacOS/Controls.TestCases.HostApp");
 
 	var p = new System.Diagnostics.Process();
 	p.StartInfo.UseShellExecute = true;
