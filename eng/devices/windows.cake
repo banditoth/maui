@@ -432,7 +432,7 @@ Task("SetupTestPaths")
 		}
 
 		var winVersion = $"{dotnetVersion}-windows{windowsVersion}";
-		var binDir = TEST_APP_PROJECT.GetDirectory().Combine("Controls.TestCases.App").Combine(CONFIGURATION + "/" + winVersion).Combine(DOTNET_PLATFORM);
+		var binDir = TEST_APP_PROJECT.GetDirectory().Combine("Controls.TestCases.HostApp").Combine(CONFIGURATION + "/" + winVersion).Combine(DOTNET_PLATFORM);
 		Information("BinDir: {0}", binDir);
 		var apps = GetFiles(binDir + "/*.exe").Where(c => !c.FullPath.EndsWith("createdump.exe"));
 		if (apps.Count() == 0) 
