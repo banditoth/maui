@@ -182,7 +182,7 @@ void ExecuteTests(string project, string device, string resultsDir, string confi
 	}
 	finally
 	{
-		StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {resultsDir}/simulator_logs.logarchive");
+		StartProcess("xcrun", $"simctl spawn {DEVICE_UDID} log collect --output {resultsDir}/simulator_logs.logarchive");
 		HandleTestResults(resultsDir, testsFailed, true);
 	}
 	
