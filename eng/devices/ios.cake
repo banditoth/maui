@@ -182,7 +182,6 @@ void ExecuteTests(string project, string device, string resultsDir, string confi
 	}
 	finally
 	{
-		StartProcess("xcrun", $"simctl spawn {DEVICE_UDID} log collect --output {resultsDir}/simulator_logs.logarchive");
 		HandleTestResults(resultsDir, testsFailed, true);
 	}
 	
@@ -328,6 +327,16 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 		var sims = ListAppleSimulators().Where(s => s.Name.Contains("XHarness")).ToArray();
 		foreach (var sim in sims)
 		{
+			try
+			{
+				StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+			}
+			catch(Exception ex)
+			{
+				Information($"Failed to collect logs for simulator {sim.Name} ({sim.UDID}): {ex.Message}");
+				Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+			}
+
 			Information($"Deleting XHarness simulator {sim.Name} ({sim.UDID})...");
 			StartProcess("xcrun", $"simctl shutdown {sim.UDID}");
 			ExecuteWithRetries(() => StartProcess("xcrun", $"simctl delete {sim.UDID}"), 3);
