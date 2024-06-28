@@ -322,19 +322,20 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 {
 	if (cleanupEnabled)
 	{
+		var logDirectory = GetLogDirectory();
 		Information("Cleaning up...");
 		Information("Deleting XHarness simulator if exists...");
 		var sims = ListAppleSimulators().Where(s => s.Name.Contains("XHarness")).ToArray();
 		foreach (var sim in sims)
 		{
-			if (!String.IsNullOrEmpty(binlogDirectory))
+			if (!String.IsNullOrEmpty(logDirectory))
 			{
 				try
 				{
 					StartProcess("zip", new ProcessSettings {
 						Arguments = new ProcessArgumentBuilder()
 							.Append("-9r")
-							.AppendQuoted($"{binlogDirectory}/DiagnosticReports_${sim.UDID}.zip")
+							.AppendQuoted($"{logDirectory}/DiagnosticReports_${sim.UDID}.zip")
 							.AppendQuoted("$HOME/Library/Logs/DiagnosticReports/"),
 						RedirectStandardOutput = true
 					});
@@ -343,19 +344,19 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 					StartProcess("zip", new ProcessSettings {
 						Arguments = new ProcessArgumentBuilder()
 							.Append("-9r")
-							.AppendQuoted($"{binlogDirectory}/CoreSimulator_${sim.UDID}.zip")
+							.AppendQuoted($"{logDirectory}/CoreSimulator_${sim.UDID}.zip")
 							.AppendQuoted($"$HOME/Library/Logs/CoreSimulator/{sim.UDID}"),
 						RedirectStandardOutput = true
 					});
-					
-					StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {binlogDirectory}/{sim.UDID}_log.logarchive");
+
+					StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {logDirectory}/{sim.UDID}_log.logarchive");
 					var screenshotPath = $"{testResultsPath}/{sim.UDID}_screenshot.png";
                 	StartProcess("xcrun", $"simctl io {sim.UDID} screenshot {screenshotPath}");
 				}
 				catch(Exception ex)
 				{
 					Information($"Failed to collect logs for simulator {sim.Name} ({sim.UDID}): {ex.Message}");
-					Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {binlogDirectory}/{sim.UDID}_log.logarchive");
+					Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {logDirectory}/{sim.UDID}_log.logarchive");
 				}
 			}
 
