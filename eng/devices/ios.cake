@@ -327,18 +327,35 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 		var sims = ListAppleSimulators().Where(s => s.Name.Contains("XHarness")).ToArray();
 		foreach (var sim in sims)
 		{
-			if (!String.IsNullOrEmpty(testResultsPath))
+			if (!String.IsNullOrEmpty(binlogDirectory))
 			{
 				try
 				{
-					StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+					StartProcess("zip", new ProcessSettings {
+						Arguments = new ProcessArgumentBuilder()
+							.Append("-9r")
+							.AppendQuoted($"{binlogDirectory}/DiagnosticReports_${sim.UDID}.zip")
+							.AppendQuoted("$HOME/Library/Logs/DiagnosticReports/"),
+						RedirectStandardOutput = true
+					});
+
+
+					StartProcess("zip", new ProcessSettings {
+						Arguments = new ProcessArgumentBuilder()
+							.Append("-9r")
+							.AppendQuoted($"{binlogDirectory}/CoreSimulator_${sim.UDID}.zip")
+							.AppendQuoted($"$HOME/Library/Logs/CoreSimulator/{sim.UDID}"),
+						RedirectStandardOutput = true
+					});
+					
+					StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {binlogDirectory}/{sim.UDID}_log.logarchive");
 					var screenshotPath = $"{testResultsPath}/{sim.UDID}_screenshot.png";
                 	StartProcess("xcrun", $"simctl io {sim.UDID} screenshot {screenshotPath}");
 				}
 				catch(Exception ex)
 				{
 					Information($"Failed to collect logs for simulator {sim.Name} ({sim.UDID}): {ex.Message}");
-					Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+					Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {binlogDirectory}/{sim.UDID}_log.logarchive");
 				}
 			}
 
