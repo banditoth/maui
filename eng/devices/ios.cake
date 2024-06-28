@@ -330,21 +330,22 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 		{
 			try
 			{
+                Information("Diagnostics Reports");
 				StartProcess("zip", new ProcessSettings {
 					Arguments = new ProcessArgumentBuilder()
 						.Append("-9r")
 						.AppendQuoted($"{logDirectory}/DiagnosticReports_${sim.UDID}.zip")
 						.AppendQuoted("$HOME/Library/Logs/DiagnosticReports/"),
-					RedirectStandardOutput = true
+					RedirectStandardOutput = false
 				});
 
-
+                Information("CoreSimulator");
 				StartProcess("zip", new ProcessSettings {
 					Arguments = new ProcessArgumentBuilder()
 						.Append("-9r")
 						.AppendQuoted($"{logDirectory}/CoreSimulator_${sim.UDID}.zip")
 						.AppendQuoted($"$HOME/Library/Logs/CoreSimulator/{sim.UDID}"),
-					RedirectStandardOutput = true
+					RedirectStandardOutput = false
 				});
 
 				StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {logDirectory}/{sim.UDID}_log.logarchive");
