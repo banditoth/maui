@@ -103,6 +103,13 @@ steps:
     condition: and(succeeded(), eq(variables['Platform.Name'], 'Mac'))
     retryCountOnTaskFailure: 1
 
+  - ${{ if eq(parameters.platform, 'ios')}}:
+    - bash: |
+        pwsh ./build.ps1 -Script eng/devices/${{ parameters.platform }}.cake ---results="$(TestResultsDirectory)" ${{ parameters.cakeArgs }}
+      displayName: Cleanup and Create Simulator Logs if Test Run Failed To
+      condition: always()
+      continueOnError: true
+
   - task: PublishTestResults@2
     displayName: Publish the $(Agent.JobName) test results
     condition: always()

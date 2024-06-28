@@ -327,14 +327,19 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 		var sims = ListAppleSimulators().Where(s => s.Name.Contains("XHarness")).ToArray();
 		foreach (var sim in sims)
 		{
-			try
+			if (!String.IsNullOrEmpty(testResultsPath))
 			{
-				StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
-			}
-			catch(Exception ex)
-			{
-				Information($"Failed to collect logs for simulator {sim.Name} ({sim.UDID}): {ex.Message}");
-				Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+				try
+				{
+					StartProcess("xcrun", $"simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+					var screenshotPath = $"{testResultsPath}/{sim.UDID}_screenshot.png";
+                	StartProcess("xcrun", $"simctl io {sim.UDID} screenshot {screenshotPath}");
+				}
+				catch(Exception ex)
+				{
+					Information($"Failed to collect logs for simulator {sim.Name} ({sim.UDID}): {ex.Message}");
+					Information($"Command Executed: simctl spawn {sim.UDID} log collect --output {testResultsPath}/{sim.UDID}_log.logarchive");
+				}
 			}
 
 			Information($"Deleting XHarness simulator {sim.Name} ({sim.UDID})...");
