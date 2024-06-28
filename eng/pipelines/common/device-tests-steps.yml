@@ -105,7 +105,7 @@ steps:
 
   - ${{ if eq(parameters.platform, 'ios')}}:
     - bash: |
-        pwsh ./build.ps1 --target=Cleanup -Script eng/devices/${{ parameters.platform }}.cake ---results="$(TestResultsDirectory)" ${{ parameters.cakeArgs }}
+        pwsh ./build.ps1 --target=Cleanup -Script eng/devices/${{ parameters.platform }}.cake ---results="$(TestResultsDirectory)" ${{ parameters.cakeArgs }} --binlog="$(LogDirectory)"
       displayName: Cleanup and Create Simulator Logs if Test Run Failed To
       condition: always()
       continueOnError: true
