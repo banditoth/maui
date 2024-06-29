@@ -330,12 +330,13 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 		{
 			try
 			{
+				var homeDirectory = Environment.GetEnvironmentVariable("HOME");
                 Information("Diagnostics Reports");
 				StartProcess("zip", new ProcessSettings {
 					Arguments = new ProcessArgumentBuilder()
 						.Append("-9r")
 						.AppendQuoted($"{logDirectory}/DiagnosticReports_${sim.UDID}.zip")
-						.AppendQuoted("$HOME/Library/Logs/DiagnosticReports/"),
+						.AppendQuoted($"{homeDirectory}/Library/Logs/DiagnosticReports/"),
 					RedirectStandardOutput = false
 				});
 
@@ -344,7 +345,7 @@ void PerformCleanupIfNeeded(bool cleanupEnabled)
 					Arguments = new ProcessArgumentBuilder()
 						.Append("-9r")
 						.AppendQuoted($"{logDirectory}/CoreSimulator_${sim.UDID}.zip")
-						.AppendQuoted($"$HOME/Library/Logs/CoreSimulator/{sim.UDID}"),
+						.AppendQuoted($"{homeDirectory}/Library/Logs/CoreSimulator/{sim.UDID}"),
 					RedirectStandardOutput = false
 				});
 
