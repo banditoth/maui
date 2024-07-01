@@ -11,7 +11,20 @@ parameters:
   agentPoolAccessToken: ''
   runCompatibilityTests: false
   testFilter: ''
-  categoriesToTest: [ 'Accessibility','ActionSheet','ActivityIndicator','Animation','AppLinks','AutomationID','Border','BoxView','Brush','Button','CarouselView','Cells','CheckBox','CollectionView','ContextActions','CustomRenderers','DatePicker','DisplayAlert','DisplayPrompt','DragAndDrop','Editor','Effects','Entry','FlyoutPage','Focus','Frame','Gestures','Image','ImageButton','IndicatorView','InputTransparent','IsEnabled','Label','Layout','Lifecycle','ListView','ManualReview','Maps','Navigation','Page','Performance','Picker','ProgressBar','RadioButton','RefreshView','ScrollView','SearchBar','Shape','Shell','Slider','Stepper','Switch','SwipeView','TabbedPage','TableView','TimePicker','TitleView','ToolbarItem','ViewBaseTests','Visual','WebView','Window' ]
+  categoryGroupsToTest:
+    - 'Accessibility,ActionSheet,ActivityIndicator,Animation,AppLinks'
+    - 'Border,BoxView,Brush,Button'
+    - 'CarouselView,Cells,CheckBox,CollectionView,ContextActions,CustomRenderers'
+    - 'DatePicker,DisplayAlert,DisplayPrompt,DragAndDrop'
+    - 'Editor,Effects,Entry,FlyoutPage,Focus,Frame,Gestures',
+    - 'Image,ImageButton,IndicatorView,InputTransparent,IsEnabled'
+    - 'Label,Layout,Lifecycle,ListView'
+    - 'ManualReview,Maps,Navigation'
+    - 'Page,Performance,Picker,ProgressBar'
+    - 'RadioButton,RefreshView'
+    - 'ScrollView,SearchBar,Shape,Shell,Slider,Stepper,Switch,SwipeView'
+    - 'TabbedPage,TableView,TimePicker,TitleView,ToolbarItem'
+    - 'ViewBaseTests,Visual,WebView,Window'
 
   projects:
     - name: name
@@ -66,9 +79,9 @@ stages:
               - job: android_ui_tests_${{ project.name }}_${{ api }}
                 strategy:
                   matrix:
-                    ${{ each category in parameters.categoriesToTest }}:
-                      ${{ category }}:
-                        CATEGORY: ${{ category }}
+                    ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                      ${{ categoryGroup }}:
+                        CATEGORYGROUP: ${{ categoryGroup }}
                 timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                 workspace:
                   clean: all
@@ -90,7 +103,7 @@ stages:
                         device: android-emulator-64_${{ api }}
                       provisionatorChannel: ${{ parameters.provisionatorChannel }}
                       agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                      testFilter: 'TestCategory=$(CATEGORY)'
+                      testFilter: $(CATEGORYGROUP)
 
   - stage: ios_ui_tests
     displayName: iOS UITests
@@ -103,9 +116,9 @@ stages:
               - job: ios_ui_tests_${{ project.name }}_${{ replace(version, '.', '_') }}
                 strategy:
                   matrix:
-                    ${{ each category in parameters.categoriesToTest }}:
-                      ${{ category }}:
-                        CATEGORY: ${{ category }}
+                    ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                      ${{ categoryGroup }}:
+                        CATEGORYGROUP: ${{ categoryGroup }}
                 timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                 workspace:
                   clean: all
@@ -130,7 +143,7 @@ stages:
                         device: ios-simulator-64_${{ version }}
                       provisionatorChannel: ${{ parameters.provisionatorChannel }}
                       agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                      testFilter: 'TestCategory=$(CATEGORY)'
+                      testFilter: $(CATEGORYGROUP)
 
   - stage: winui_ui_tests
     displayName: WinUI UITests
@@ -141,9 +154,9 @@ stages:
               - job: winui_ui_tests_${{ project.name }}
                 strategy:
                   matrix:
-                    ${{ each category in parameters.categoriesToTest }}:
-                      ${{ category }}:
-                        CATEGORY: ${{ category }}
+                    ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                      ${{ categoryGroup }}:
+                        CATEGORYGROUP: ${{ categoryGroup }}
                 timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                 workspace:
                   clean: all
@@ -161,7 +174,7 @@ stages:
                       app: ${{ project.app }}
                       provisionatorChannel: ${{ parameters.provisionatorChannel }}
                       agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                      testFilter: 'TestCategory=$(CATEGORY)'
+                      testFilter: $(CATEGORYGROUP)
 
   - stage: mac_ui_tests
     displayName: macOS UITests
@@ -172,9 +185,9 @@ stages:
               - job: mac_ui_tests_${{ project.name }}
                 strategy:
                   matrix:
-                    ${{ each category in parameters.categoriesToTest }}:
-                      ${{ category }}:
-                        CATEGORY: ${{ category }}
+                    ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                      ${{ categoryGroup }}:
+                        CATEGORYGROUP: ${{ categoryGroup }}
                 timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                 workspace:
                   clean: all
@@ -193,7 +206,7 @@ stages:
                       app: ${{ project.app }}
                       provisionatorChannel: ${{ parameters.provisionatorChannel }}
                       agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                      testFilter: 'TestCategory=$(CATEGORY)'
+                      testFilter: $(CATEGORYGROUP)
 
   - ${{ if eq(parameters.runCompatibilityTests, true) }}:  
     - stage: android_compatibility_ui_tests
@@ -207,9 +220,9 @@ stages:
                 - job: android_compatibility_ui_tests_${{ project.name }}_${{ api }}
                   strategy:
                     matrix:
-                      ${{ each category in parameters.categoriesToTest }}:
-                        ${{ category }}:
-                          CATEGORY: ${{ category }}
+                      ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                        ${{ categoryGroup }}:
+                          CATEGORYGROUP: ${{ categoryGroup }}
                   timeoutInMinutes: 240
                   workspace:
                     clean: all
@@ -233,7 +246,7 @@ stages:
                           DEVICE: android-emulator-64_${{ api }}
                         provisionatorChannel: ${{ parameters.provisionatorChannel }}
                         agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                        testFilter: 'TestCategory=$(CATEGORY)'
+                        testFilter: $(CATEGORYGROUP)
 
     - stage: ios_compatibility_ui_tests
       displayName: iOS Compatibility UITests
@@ -246,9 +259,9 @@ stages:
                 - job: ios_compatibility_ui_tests_${{ project.name }}_${{ replace(version, '.', '_') }}
                   strategy:
                     matrix:
-                      ${{ each category in parameters.categoriesToTest }}:
-                        ${{ category }}:
-                          CATEGORY: ${{ category }}
+                      ${{ each categoryGroup in parameters.categoryGroupsToTest }}:
+                        ${{ categoryGroup }}:
+                          CATEGORYGROUP: ${{ categoryGroup }}
                   timeoutInMinutes: 240
                   workspace:
                     clean: all
@@ -275,4 +288,4 @@ stages:
                           device: ios-simulator-64_${{ version }}
                         provisionatorChannel: ${{ parameters.provisionatorChannel }}
                         agentPoolAccessToken: ${{ parameters.agentPoolAccessToken }}
-                        testFilter: 'TestCategory=$(CATEGORY)'
+                        testFilter: $(CATEGORYGROUP)
