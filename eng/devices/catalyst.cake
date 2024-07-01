@@ -143,7 +143,7 @@ void ExecuteUITests(string project, string app, string device, string resultsDir
 	var name = System.IO.Path.GetFileNameWithoutExtension(project);
 	var binlog = $"{binDir}/{name}-{config}-mac.binlog";
 	var appiumLog = $"{binDir}/appium_mac.log";
-	var resultsFileName = $"{name}-{config}-catalyst-{testFilter.Replace(",", "_").Replace("TestCategory=", "")}";
+	var resultsFileName = $"{name}-{config}-catalyst-{testFilter.Replace("|", "_").Replace("TestCategory=", "")}";
 
 	DotNetBuild(project, new DotNetBuildSettings
 	{
