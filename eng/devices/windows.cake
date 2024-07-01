@@ -212,7 +212,7 @@ Task("Test")
 	Information("Cleaned directories");
 
 	var testResultsPath = MakeAbsolute((DirectoryPath)TEST_RESULTS).FullPath.Replace("/", "\\");
-	var testResultsFile = testResultsPath + $"\\TestResults-{PACKAGEID.Replace(".", "_")}.xml";
+	var testResultsFile = testResultsPath + $"\\TestResults-{PACKAGEID.Replace(".", "_")}-{testFilter.Replace(",", "_")}.xml";
 	var testsToRunFile = MakeAbsolute((DirectoryPath)TEST_RESULTS).FullPath.Replace("/", "\\") + $"\\devicetestcategories.txt";
 
 	Information($"Test Results File: {testResultsFile}");
