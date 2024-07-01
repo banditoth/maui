@@ -12,19 +12,19 @@ parameters:
   runCompatibilityTests: false
   testFilter: ''
   categoryGroupsToTest:
-    - 'Accessibility,ActionSheet,ActivityIndicator,Animation,AppLinks'
-    - 'Border,BoxView,Brush,Button'
-    - 'CarouselView,Cells,CheckBox,CollectionView,ContextActions,CustomRenderers'
-    - 'DatePicker,DisplayAlert,DisplayPrompt,DragAndDrop'
-    - 'Editor,Effects,Entry,FlyoutPage,Focus,Frame,Gestures',
-    - 'Image,ImageButton,IndicatorView,InputTransparent,IsEnabled'
-    - 'Label,Layout,Lifecycle,ListView'
-    - 'ManualReview,Maps,Navigation'
-    - 'Page,Performance,Picker,ProgressBar'
-    - 'RadioButton,RefreshView'
-    - 'ScrollView,SearchBar,Shape,Shell,Slider,Stepper,Switch,SwipeView'
-    - 'TabbedPage,TableView,TimePicker,TitleView,ToolbarItem'
-    - 'ViewBaseTests,Visual,WebView,Window'
+  - 'Accessibility,ActionSheet,ActivityIndicator,Animation,AppLinks'
+  - 'Border,BoxView,Brush,Button'
+  - 'CarouselView,Cells,CheckBox,CollectionView,ContextActions,CustomRenderers'
+  - 'DatePicker,DisplayAlert,DisplayPrompt,DragAndDrop'
+  - 'Editor,Effects,Entry,FlyoutPage,Focus,Frame,Gestures',
+  - 'Image,ImageButton,IndicatorView,InputTransparent,IsEnabled'
+  - 'Label,Layout,Lifecycle,ListView'
+  - 'ManualReview,Maps,Navigation'
+  - 'Page,Performance,Picker,ProgressBar'
+  - 'RadioButton,RefreshView'
+  - 'ScrollView,SearchBar,Shape,Shell,Slider,Stepper,Switch,SwipeView'
+  - 'TabbedPage,TableView,TimePicker,TitleView,ToolbarItem'
+  - 'ViewBaseTests,Visual,WebView,Window'
 
   projects:
     - name: name
