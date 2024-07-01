@@ -70,7 +70,7 @@ steps:
 
       # Cake does not allow empty parameters, so check if our filter is empty before adding it
       if ($testFilter) {
-        $command += " --test-filter ""${{ testFilter }}"""
+        $command += " --test-filter ""$testFilter"""
       }
 
       Invoke-Expression $command
