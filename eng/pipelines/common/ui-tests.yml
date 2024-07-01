@@ -10,7 +10,6 @@ parameters:
   provisionatorChannel: 'latest'
   agentPoolAccessToken: ''
   runCompatibilityTests: false
-  testFilter: ''
   categoryGroupsToTest:
     - 'Accessibility,ActionSheet,ActivityIndicator,Animation,AppLinks'
     - 'Border,BoxView,Brush,Button'

@@ -62,7 +62,7 @@ steps:
       
       $testFilter = ""
 
-      if ($testFilter -eq "zzEmptyCategoryzz")
+      if ("${{ parameters.testFilter }}" -eq "zzEmptyCategoryzz")
       {
         $testFilter = "TestCategory\!~'.+'"
       }
