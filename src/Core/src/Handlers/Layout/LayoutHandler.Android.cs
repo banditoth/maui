@@ -58,9 +58,14 @@ namespace Microsoft.Maui.Handlers
 			{
 				Remove(args.View);
 			}
-			else if(args.Index < PlatformView.ChildCount)
+			else 
 			{
-				PlatformView.RemoveViewAt(args.Index);
+				var targetIndex = VirtualView.GetLayoutHandlerIndex(args.View);
+
+				if(targetIndex < PlatformView.ChildCount)
+				{
+					PlatformView.RemoveViewAt(targetIndex);
+				}
 			}
 		}
 
