@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Handlers
 			{
 				var targetIndex = VirtualView.GetLayoutHandlerIndex(args.View);
 
-				if(targetIndex < PlatformView.Children.Length)
+				if(targetIndex < PlatformView.Children.Count)
 				{
 					var childToRemove = PlatformView.Children[targetIndex];
 					PlatformView.Children.Remove(childToRemove);
