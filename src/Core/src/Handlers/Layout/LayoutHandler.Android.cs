@@ -4,7 +4,7 @@ using AView = Android.Views.View;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class LayoutHandler : ViewHandler<ILayout, LayoutViewGroup>
+	public partial class LayoutHandler : ViewHandler<ILayout, LayoutViewGroup>, ILayoutHandler2
 	{
 		protected override LayoutViewGroup CreatePlatformView()
 		{
@@ -50,6 +50,18 @@ namespace Microsoft.Maui.Handlers
 
 			var targetIndex = VirtualView.GetLayoutHandlerIndex(child);
 			PlatformView.AddView(child.ToPlatform(MauiContext), targetIndex);
+		}
+
+		void ILayoutHandler2.Remove(LayoutHandlerUpdate args)
+		{
+			if (args.View.Handler?.PlatformView is not null)
+			{
+				Remove(args.View);
+			}
+			else if(args.Index < PlatformView.ChildCount)
+			{
+				PlatformView.RemoveViewAt(args.Index);
+			}
 		}
 
 		public void Remove(IView child)

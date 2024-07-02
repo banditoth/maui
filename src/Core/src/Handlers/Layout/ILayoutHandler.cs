@@ -24,4 +24,11 @@ namespace Microsoft.Maui
 		void Update(int index, IView view);
 		void UpdateZIndex(IView view);
 	}
+
+	// TODO In a future release we can delete this and make it
+	// an implicit implementation on ILayoutHandler (.NET9 maybe)
+	interface ILayoutHandler2
+	{
+		void Remove(LayoutHandlerUpdate view);
+	}
 }

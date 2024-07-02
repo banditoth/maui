@@ -5,7 +5,7 @@ using PlatformView = UIKit.UIView;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class LayoutHandler : ViewHandler<ILayout, LayoutView>
+	public partial class LayoutHandler : ViewHandler<ILayout, LayoutView>, ILayoutHandler2
 	{
 		protected override LayoutView CreatePlatformView()
 		{
@@ -53,6 +53,18 @@ namespace Microsoft.Maui.Handlers
 			if (child.FlowDirection == FlowDirection.MatchParent)
 			{
 				childPlatformView.UpdateFlowDirection(child);
+			}
+		}
+
+		void ILayoutHandler2.Remove(LayoutHandlerUpdate args)
+		{
+			if (args.View.Handler?.PlatformView is not null)
+			{
+				Remove(args.View);
+			}
+			else if(args.Index < PlatformView.Subviews.Length)
+			{
+				PlatformView.Subviews[args.Index].RemoveFromSuperview();
 			}
 		}
 

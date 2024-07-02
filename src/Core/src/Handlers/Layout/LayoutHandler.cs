@@ -90,7 +90,14 @@ namespace Microsoft.Maui.Handlers
 		{
 			if (arg is LayoutHandlerUpdate args)
 			{
-				handler.Remove(args.View);
+				if (handler is ILayoutHandler2 lh2)
+				{
+					lh2.Remove(args);
+				}
+				else
+				{
+					handler.Remove(args.View);
+				}
 			}
 		}
 

@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class LayoutHandler : ViewHandler<ILayout, LayoutPanel>
+	public partial class LayoutHandler : ViewHandler<ILayout, LayoutPanel>, ILayoutHandler2
 	{
 		public void Add(IView child)
 		{
@@ -43,6 +43,19 @@ namespace Microsoft.Maui.Handlers
 			if (child?.ToPlatform() is UIElement view)
 			{
 				PlatformView.Children.Remove(view);
+			}
+		}
+
+		void ILayoutHandler2.Remove(LayoutHandlerUpdate args)
+		{
+			if (args.View.Handler?.PlatformView is not null)
+			{
+				Remove(args.View);
+			}
+			else if(args.Index < PlatformView.Children.Length)
+			{
+				var childToRemove = PlatformView.Children[index];
+				PlatformView.Children.Remove(childToRemove);
 			}
 		}
 
