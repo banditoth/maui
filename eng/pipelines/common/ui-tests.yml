@@ -11,6 +11,8 @@ parameters:
   agentPoolAccessToken: ''
   runCompatibilityTests: false
   categoryGroupsToTest:
+    # Make sure that this list is always up-to-date with src/Controls/tests/TestCases.Shared.Tests/UITestCategories.cs
+    # we might want to improve this somehow depending on how much the categories change over time
     - 'Accessibility,ActionSheet,ActivityIndicator,Animation,AppLinks'
     - 'Border,BoxView,Brush,Button'
     - 'CarouselView,Cells,CheckBox,CollectionView,ContextActions,CustomRenderers'
@@ -24,7 +26,6 @@ parameters:
     - 'ScrollView,SearchBar,Shape,Shell,Slider,Stepper,Switch,SwipeView'
     - 'TabbedPage,TableView,TimePicker,TitleView,ToolbarItem'
     - 'ViewBaseTests,Visual,WebView,Window'
-    #- 'zzEmptyCategoryzz' # reserved keyword to make sure we run tests with no category specified
 
   projects:
     - name: name
