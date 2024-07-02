@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.DeviceTests.Stubs;
 using Microsoft.Maui.Handlers;
@@ -80,7 +81,12 @@ namespace Microsoft.Maui.DeviceTests.Handlers.Layout
 		{
 			var layout = new LayoutStub();
 			var slider = new SliderStub();
+			var slider2 = new SliderStub();
 			layout.Add(slider);
+			layout.Add(slider2);
+
+			slider.ZIndex = 1;
+			slider2.ZIndex = 0;
 
 			var handler = await CreateHandlerAsync(layout);
 
@@ -88,10 +94,10 @@ namespace Microsoft.Maui.DeviceTests.Handlers.Layout
 			{
 				slider.Handler.DisconnectHandler();
 				handler.Invoke(nameof(ILayoutHandler.Remove), new LayoutHandlerUpdate(0, slider));
-				return GetNativeChildCount(handler);
+				return GetNativeChildren(handler).First() == slider2.Handler.PlatformView;
 			});
 
-			Assert.Equal(0, count);
+			Assert.True(count);
 		}
 
 		[Fact(DisplayName = "DisconnectHandler removes child from native layout")]
