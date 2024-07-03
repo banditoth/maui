@@ -210,6 +210,11 @@ void ExecuteUITests(string project, string app, string device, string resultsDir
 	var appiumLog = $"{binDir}/appium_ios.log";
 	var resultsFileName = $"{name}-{config}-ios-{testFilter.Replace("|", "_").Replace("TestCategory=", "")}";
 
+	if (resultsFileName.Contains("!~'.+'"))
+	{
+		resultsFileName = $"{name}-{config}-ios-notcategorized";
+	}
+
 	DotNetBuild(project, new DotNetBuildSettings
 	{
 		Configuration = config,

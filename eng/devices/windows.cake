@@ -219,6 +219,11 @@ Task("Test")
 		testResultsFile += $"-{testFilter.Replace("|", "_").Replace("TestCategory=", "")}";
 	}
 
+	if (resultsFileName.Contains("!~'.+'"))
+	{
+		resultsFileName = $"\\TestResults-{PACKAGEID.Replace(".", "_")}-notcategorized";
+	}
+
 	testResultsFile += ".xml";
 
 	var testsToRunFile = MakeAbsolute((DirectoryPath)TEST_RESULTS).FullPath.Replace("/", "\\") + $"\\devicetestcategories.txt";

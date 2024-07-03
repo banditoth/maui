@@ -145,6 +145,11 @@ void ExecuteUITests(string project, string app, string device, string resultsDir
 	var appiumLog = $"{binDir}/appium_mac.log";
 	var resultsFileName = $"{name}-{config}-catalyst-{testFilter.Replace("|", "_").Replace("TestCategory=", "")}";
 
+	if (resultsFileName.Contains("!~'.+'"))
+	{
+		resultsFileName = $"{name}-{config}-catalyst-notcategorized";
+	}
+
 	DotNetBuild(project, new DotNetBuildSettings
 	{
 		Configuration = config,
