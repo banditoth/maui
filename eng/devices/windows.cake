@@ -219,9 +219,9 @@ Task("Test")
 		testResultsFile += $"-{testFilter.Replace("|", "_").Replace("TestCategory=", "")}";
 	}
 
-	if (resultsFileName.Contains("!~'.+'"))
+	if (testResultsFile.Contains("!~'.+'"))
 	{
-		resultsFileName = $"\\TestResults-{PACKAGEID.Replace(".", "_")}-notcategorized";
+		testResultsFile = $"\\TestResults-{PACKAGEID.Replace(".", "_")}-notcategorized";
 	}
 
 	testResultsFile += ".xml";
