@@ -193,7 +193,7 @@ namespace Microsoft.Maui.Storage
 
 		internal override Task<Stream> PlatformOpenReadAsync()
 		{
-			data ??= uiImage.NormalizeOrientation().AsPNG();
+			data ??= uiImage.NormalizeOrientation().AsJPEG();
 
 			return Task.FromResult(data.AsStream());
 		}
